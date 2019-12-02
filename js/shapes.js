@@ -1,5 +1,6 @@
 window.onload = function() {
     // add event listeners to respond to button clicks
+    object.onload = function sayHello();
 }
 
 /*
@@ -7,7 +8,14 @@ window.onload = function() {
  */
 
 const sayHello = function() {
-
+  let sayHelloFunction = prompt("Message: ");
+  if (sayHelloFunction == null || sayHelloFunction == "" ) {
+    return null;
+  } else if (sayHelloFunction.length > 50) {
+    alert ("This has exceeded the limit.")
+  } else if {
+    display sayHelloFunction;
+  }
 };
 
 /*
@@ -15,7 +23,7 @@ const sayHello = function() {
  */
 
 const drawRectangle = function() {
-    
+
 };
 
 /*
@@ -23,7 +31,7 @@ const drawRectangle = function() {
  */
 
 const drawColoredRectangle = function() {
-    
+
 };
 
 /*
@@ -31,7 +39,7 @@ const drawColoredRectangle = function() {
  */
 
 const drawTriangle = function() {
-    
+
 };
 
 /*
@@ -39,7 +47,7 @@ const drawTriangle = function() {
  */
 
 const drawFace = function() {
-    
+
 };
 
 /*
@@ -47,5 +55,5 @@ const drawFace = function() {
  */
 
 const drawPyramid = function() {
-    
+
 };
