@@ -19,6 +19,7 @@ window.onload = function() {
     // equivalent set of six event listeners for your solutions. the first one is done for you.
 
     document.getElementById("hello").onclick = sayHello;
+
 }
 
 /*
@@ -26,7 +27,17 @@ window.onload = function() {
  */
 
 const sayHello = function() {
-    // write your exercise 1 code here
+  var message;
+  var canvas = document.getElementById("student-canvas-1");
+  var ctx = canvas.getContext('2d');
+  do {
+    message = prompt("Message: ");
+
+  } while (message > 50);
+  // context.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.font = '48px sans-serif';
+  ctx.strokeText(message, 30,70);
+
 };
 
 /*
