@@ -70,6 +70,8 @@ const drawRectangle = function() {
         alert("Your x-coordinate must be between 1 and 1024.");
       } else if (y > 512 || x < 1) {
         alert("Your y-coordinate must be between 1 and 512.");
+      } else if (Number.isNaN(width) || Number.isNaN(height) || Number.isNaN(x) || Number.isNaN(y)) {
+        alert("One of your values is not a number.");
       }
     } while (width > 1024 || width < 1 || height > 512 || height < 1 || x > 1024 || x < 1 || y > 512 || y < 1);
     ctx.rect(x, y, width, height);
@@ -127,6 +129,58 @@ const drawTriangle = function() {
   var canvas = document.getElementById("student-canvas-4");
   var ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  do {
+    var side1 = prompt("Side 1: ");
+    var side2 = prompt("Side 2: ");
+    var side3 = prompt("Side 3: ");
+    if (Number.isNaN(side1) || Number.isNaN(side2) || Number.isNaN(side3)) {
+      alert("One of your sides is not a number.");
+    } else if (side1 > 1024 || side2 > 1024 || side > 1024) {
+      alert("Your triangle won't fit on the canvas.");
+    }
+    if (side1 < side2 && side1 < side3 && side2 < side3) {
+      side1 = side1;
+      side1 = side2;
+      side3 = side3;
+    } else if (side1 < side2 && side1 < side3 && side2 > side3) {
+      side1 = side1;
+      side2 = side3;
+      side3 = side2;
+    } else if (side2 < side1 && side2 < side3 && side1 < side3) {
+      side1 = side2;
+      side2 = side1;
+      side3 = side3;
+    } else if (side2 < side1 && side2 < side3 && side1 > side3) {
+      side1 = side2;
+      side2 = side3;
+      side3 = side1
+    } else if (side3 < side1 && side3 < side2 && side2 < side1) {
+      side1 = side3;
+      side2 = side2;
+      side3 = side1;
+    } else if (side3 < side1 && side3 < side2 && side2 > side1) {
+      side1 = side3;
+      side2 = side1;
+      side3 = side2;
+    }
+    if ((side1 * side1) + (side2 * side2) !== (side3 * side3)) {
+      alert("That's not a valid right triangle.");
+    }
+  } while ((side1 * side1) + (side2 * side2) !== (side3 * side3) || Number.isNaN(side1) || Number.isNaN(side2) || Number.isNaN(side3) || side1 > 1024 || side2 > 1024 || side > 1024 );
+
+  var height = side1;
+  var base = side2;
+  var hypotenuse = side3;
+
+  height = height + 25;
+  base = base + 25;
+
+  ctx.beginPath();
+  ctx.moveTo(25,25);
+  ctx.lineTo(25, height);
+  ctx.lineTo(base, height);
+  ctx.lineTo(25,25);
+  ctx.stroke();
 };
 
 /*
