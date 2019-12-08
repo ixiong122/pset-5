@@ -72,7 +72,8 @@ const drawRectangle = function() {
         alert("Your y-coordinate must be between 1 and 512.");
       }
     } while (width > 1024 || width < 1 || height > 512 || height < 1 || x > 1024 || x < 1 || y > 512 || y < 1);
-
+    ctx.rect(x, y, width, height);
+    ctx.stroke();
 };
 
 /*
@@ -80,8 +81,8 @@ const drawRectangle = function() {
  */
 
 const drawColoredRectangle = function() {
-  const canvas = document.getElementById("student-canvas-2");
-  const ctx = canvas.getContext('2d');
+  var canvas = document.getElementById("student-canvas-3");
+  var ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   do {
     let finalColor;
@@ -111,9 +112,10 @@ const drawColoredRectangle = function() {
       break;
     default:
     alert(color + " is not a supported color.")
-  } while (color == null);
-
   }
+  } while (color == null);
+ctx.fillStyle = color;
+ctx.fillRect(10, 10, 100, 50);
 
 };
 
@@ -122,7 +124,9 @@ const drawColoredRectangle = function() {
  */
 
 const drawTriangle = function() {
-    // write your exercise 4 code here
+  var canvas = document.getElementById("student-canvas-4");
+  var ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 };
 
 /*
