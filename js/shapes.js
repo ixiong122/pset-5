@@ -91,6 +91,7 @@ const drawColoredRectangle = function() {
     var finalColor = "";
     var color = String(prompt("Color: "));
     color = color.toLowerCase();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     switch(color) {
     case "blue":
       finalColor = "blue"
@@ -115,12 +116,13 @@ const drawColoredRectangle = function() {
       break;
     default:
     alert(color + " is not a supported color.")
-    finalColor == null;
+    finalColor == "white";
+    // ctx.clearRect(0, 0, canvas.width, canvas.height);
   }
-} while (finalColor == null);
+} while (finalColor == "white");
 
-if (finalColor !== null) {
-ctx.clearRect(0, 0, canvas.width, canvas.height);
+if (finalColor !== "white") {
+
 ctx.fillStyle = finalColor;
 ctx.fillRect(10, 10, 100, 50);
 }
