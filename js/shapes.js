@@ -86,8 +86,9 @@ const drawColoredRectangle = function() {
   var canvas = document.getElementById("student-canvas-3");
   var ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
   do {
-    let finalColor;
+    var finalColor = "";
     var color = String(prompt("Color: "));
     color = color.toLowerCase();
     switch(color) {
@@ -114,11 +115,15 @@ const drawColoredRectangle = function() {
       break;
     default:
     alert(color + " is not a supported color.")
+    finalColor == null;
   }
-  } while (color == null);
-ctx.fillStyle = color;
-ctx.fillRect(10, 10, 100, 50);
+} while (finalColor == null);
 
+if (finalColor !== null) {
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+ctx.fillStyle = finalColor;
+ctx.fillRect(10, 10, 100, 50);
+}
 };
 
 /*
@@ -140,7 +145,7 @@ const drawTriangle = function() {
     }
     if (side1 < side2 && side1 < side3 && side2 < side3) {
       side1 = side1;
-      side1 = side2;
+      side2 = side2;
       side3 = side3;
     } else if (side1 < side2 && side1 < side3 && side2 > side3) {
       side1 = side1;
@@ -188,7 +193,7 @@ const drawTriangle = function() {
  */
 
 const drawFace = function() {
-    // write your exercise 4 code here
+
 };
 
 /*
