@@ -83,13 +83,15 @@ const drawRectangle = function() {
  */
 
 const drawColoredRectangle = function() {
+  var finalColor;
+  var color;
   var canvas = document.getElementById("student-canvas-3");
   var ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   do {
-    var finalColor = "";
-    var color = String(prompt("Color: "));
+    finalColor = "";
+    color = String(prompt("Color: "));
     color = color.toLowerCase();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     switch(color) {
@@ -114,10 +116,13 @@ const drawColoredRectangle = function() {
     case "yellow":
       finalColor = "yellow"
       break;
+    case null:
+      break;
     default:
-    alert(color + " is not a supported color.")
-    finalColor == "white";
-    // ctx.clearRect(0, 0, canvas.width, canvas.height);
+      alert(color + " is not a supported color.")
+      color = "white";
+      finalColor = "white";
+      break;
   }
 } while (finalColor == "white");
 
@@ -133,51 +138,57 @@ ctx.fillRect(10, 10, 100, 50);
  */
 
 const drawTriangle = function() {
+  var side1;
+  var side2;
+  var side3;
+  var newSide1;
+  var newSide2;
+  var newSide3;
   var canvas = document.getElementById("student-canvas-4");
   var ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   do {
-    var side1 = prompt("Side 1: ");
-    var side2 = prompt("Side 2: ");
-    var side3 = prompt("Side 3: ");
+     side1 = Number(prompt("Side 1: "));
+     side2 = Number(prompt("Side 2: "));
+     side3 = Number(prompt("Side 3: "));
     if (Number.isNaN(side1) || Number.isNaN(side2) || Number.isNaN(side3)) {
       alert("One of your sides is not a number.");
-    } else if (side1 > 1024 || side2 > 1024 || side > 1024) {
+    } else if (side1 > 1024 || side2 > 1024 || side3 > 1024) {
       alert("Your triangle won't fit on the canvas.");
     }
     if (side1 < side2 && side1 < side3 && side2 < side3) {
-      side1 = side1;
-      side2 = side2;
-      side3 = side3;
+      newSide1 = side1;
+      newSide2 = side2;
+      newSide3 = side3;
     } else if (side1 < side2 && side1 < side3 && side2 > side3) {
-      side1 = side1;
-      side2 = side3;
-      side3 = side2;
+      newSide1 = side1;
+      newSide2 = side3;
+      newSide3 = side2;
     } else if (side2 < side1 && side2 < side3 && side1 < side3) {
-      side1 = side2;
-      side2 = side1;
-      side3 = side3;
+      newSide1 = side2;
+      newSide2 = side1;
+      newSide3 = side3;
     } else if (side2 < side1 && side2 < side3 && side1 > side3) {
-      side1 = side2;
-      side2 = side3;
-      side3 = side1
+      newSide1 = side2;
+      newSide2 = side3;
+      newSide3 = side1
     } else if (side3 < side1 && side3 < side2 && side2 < side1) {
-      side1 = side3;
-      side2 = side2;
-      side3 = side1;
+      newSide1 = side3;
+      newSide2 = side2;
+      newSide3 = side1;
     } else if (side3 < side1 && side3 < side2 && side2 > side1) {
-      side1 = side3;
-      side2 = side1;
-      side3 = side2;
+      newSide1 = side3;
+      newSide2 = side1;
+      newSide3 = side2;
     }
-    if ((side1 * side1) + (side2 * side2) !== (side3 * side3)) {
+    if ((newSide1 * newSide1) + (newSide2 * newSide2) !== (newSide3 * newSide3)) {
       alert("That's not a valid right triangle.");
     }
-  } while ((side1 * side1) + (side2 * side2) !== (side3 * side3) || Number.isNaN(side1) || Number.isNaN(side2) || Number.isNaN(side3) || side1 > 1024 || side2 > 1024 || side > 1024 );
+  } while ((newSide1 * newSide1) + (newSide2 * newSide2) !== (newSide3 * newSide3) || Number.isNaN(side1) || Number.isNaN(side2) || Number.isNaN(side3) || side1 > 1024 || side2 > 1024 || side3 > 1024 );
 
-  var height = side1;
-  var base = side2;
-  var hypotenuse = side3;
+  var height = newSide1;
+  var base = newSide2;
+  var hypotenuse = newSide3;
 
   height = height + 25;
   base = base + 25;
@@ -195,7 +206,19 @@ const drawTriangle = function() {
  */
 
 const drawFace = function() {
-
+  var radius;
+  var canvas = document.getElementById("student-canvas-5");
+  var ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  do {
+    radius = prompt("Radius: ");
+    if (radius < 32) {
+      alert("Your radius must be at least 32.");
+    }
+    if (radius > 256) {
+      alert("Your smiley face won't fit on the canvas.");
+    }
+  } while(radius < 32 || radius > 256)
 };
 
 /*
