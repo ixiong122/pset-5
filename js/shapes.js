@@ -39,6 +39,9 @@ const sayHello = function() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   do {
     message = prompt("Message: ");
+    if (message = null) {
+      break;
+    }
     if (message.length > 50) {
       alert("Your message is too long. Keep it under 50 characters.");
     }
@@ -89,12 +92,17 @@ const drawColoredRectangle = function() {
   var ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+  if (color == null) {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+
   do {
     finalColor = "";
     color = String(prompt("Color: "));
     color = color.toLowerCase();
+    finalColor = color;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    switch(color) {
+    switch(finalColor) {
     case "blue":
       finalColor = "blue"
       break;
@@ -115,8 +123,6 @@ const drawColoredRectangle = function() {
       break;
     case "yellow":
       finalColor = "yellow"
-      break;
-    case null:
       break;
     default:
       alert(color + " is not a supported color.")
@@ -226,5 +232,36 @@ const drawFace = function() {
  */
 
 const drawPyramid = function() {
-    // write your exercise 5 code here
+  var distance = Number(distance);
+  var height = Number(height);
+  var row;
+  var column;
+  var counter = 5;
+  var canvas = document.getElementById("student-canvas-6");
+  var ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  do {
+    var side = prompt("Side: ");
+
+    if (side < 1) {
+      alert("Your block size must be at least one.");
+    } else if (side > canvas.height || side > canvas.width) {
+      alert("Your pyramid won't fit on the canvas.");
+    } else if (Number.isNaN(side)) {
+      alert("Your block size is not a number.");
+    }
+  } while (side < 1 || side > canvas.height || side > canvas.width || Number.isNaN(side));
+  for (i =5; i > 0; i--) {
+    ctx.beginPath();
+    ctx.rect(10 + distance, (502 - side) - height, Number(side), Number(side));
+    ctx.stroke();
+    ctx.closePath();
+    distance = Number(distance) + Number(side);
+    counter--;
+  }
+  row++;
+  distance =  row * (1/2 * side);
+  column ++;
+  jeogjt = column + side;
 };
