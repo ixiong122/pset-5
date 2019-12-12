@@ -39,17 +39,17 @@ const sayHello = function() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   do {
     message = prompt("Message: ");
-    if (message = null) {
+    if (message == null) {
       break;
     }
     if (message.length > 50) {
       alert("Your message is too long. Keep it under 50 characters.");
     }
   } while (message.length > 50);
-
+  if (message != null) {
   ctx.font = '48px sans-serif';
   ctx.strokeText(message, 30,70,994);
-
+}
 };
 
 /*
@@ -65,6 +65,9 @@ const drawRectangle = function() {
       var height = prompt("Height: ");
       var x = prompt("X: ");
       var y = prompt("Y: ");
+      if (width == null || height == null || x == null || y == null) {
+        break;
+      }
       if (width > 1024 || width < 1) {
         alert("Your width must be between 1 and 1024.");
       } else if (height > 512 || height < 1) {
@@ -77,8 +80,10 @@ const drawRectangle = function() {
         alert("One of your values is not a number.");
       }
     } while (width > 1024 || width < 1 || height > 512 || height < 1 || x > 1024 || x < 1 || y > 512 || y < 1);
+    if (width != null || height != null || x != null || y != null) {
     ctx.rect(x, y, width, height);
     ctx.stroke();
+  }
 };
 
 /*
@@ -92,16 +97,15 @@ const drawColoredRectangle = function() {
   var ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-  if (color == null) {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-  }
-
   do {
     finalColor = "";
     color = String(prompt("Color: "));
     color = color.toLowerCase();
     finalColor = color;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (color == null) {
+      break;
+    }
     switch(finalColor) {
     case "blue":
       finalColor = "blue"
@@ -132,7 +136,7 @@ const drawColoredRectangle = function() {
   }
 } while (finalColor == "white");
 
-if (finalColor !== "white") {
+if (finalColor != "white" || color != null) {
 
 ctx.fillStyle = finalColor;
 ctx.fillRect(10, 10, 100, 50);
@@ -157,6 +161,9 @@ const drawTriangle = function() {
      side1 = Number(prompt("Side 1: "));
      side2 = Number(prompt("Side 2: "));
      side3 = Number(prompt("Side 3: "));
+     if (side1 == null || side2 == null || side3 == null ||side1 == 0 || side2 == 0 || side3 == 0) {
+       break;
+     }
     if (Number.isNaN(side1) || Number.isNaN(side2) || Number.isNaN(side3)) {
       alert("One of your sides is not a number.");
     } else if (side1 > 1024 || side2 > 1024 || side3 > 1024) {
@@ -198,13 +205,14 @@ const drawTriangle = function() {
 
   height = height + 25;
   base = base + 25;
-
-  ctx.beginPath();
-  ctx.moveTo(25,25);
-  ctx.lineTo(25, height);
-  ctx.lineTo(base, height);
-  ctx.lineTo(25,25);
-  ctx.stroke();
+  if (side1 != null || side2 != null || side3 != null || side1 == 0 || side2 == 0 || side3 == 0 ) {
+    ctx.beginPath();
+    ctx.moveTo(25,25);
+    ctx.lineTo(25, height);
+    ctx.lineTo(base, height);
+    ctx.lineTo(25,25);
+    ctx.stroke();
+  }
 };
 
 /*
@@ -217,15 +225,46 @@ const drawFace = function() {
   var ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   do {
-    radius = prompt("Radius: ");
+    radius = Number(prompt("Radius: "));
+    if (radius == null) {
+      break;
+    }
     if (radius < 32) {
       alert("Your radius must be at least 32.");
     }
     if (radius > 256) {
       alert("Your smiley face won't fit on the canvas.");
     }
-  } while(radius < 32 || radius > 256)
+    if (isNaN(radius)) {
+      alert("Your radius is not a number");
+    }
+    if (radius == null) {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+  } while(radius < 32 || radius > 256 || isNaN(radius));
+
+  if (radius != null && radius > 32 && radius < 256) {
+
+    ctx.beginPath();
+    ctx.arc(512, 256, radius, 0, 2 * Math.PI)
+    ctx.stroke();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(512 + 0.4 * radius, 256 + 0.4 * radius, radius * 0.15, 0, 2 * Math.PI)
+    ctx.stroke();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(512 - 0.4 * radius, 256 + 0.4 * radius, radius * 0.15, 0, 2 * Math.PI)
+    ctx.stroke();
+    ctx.closePath();
+    ctx.beginPath();
+    ctx.arc(512, 256, radius * 0.7, 0, Math.PI)
+    ctx.stroke();
+    ctx.closePath();
+
+  }
 };
+
 
 /*
  * Exercise 6 (extra credit).
