@@ -37,6 +37,7 @@ const sayHello = function() {
   var canvas = document.getElementById("student-canvas-1");
   var ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+
   do {
     message = prompt("Message: ");
     if (message == null) {
@@ -46,6 +47,7 @@ const sayHello = function() {
       alert("Your message is too long. Keep it under 50 characters.");
     }
   } while (message.length > 50);
+
   if (message != null) {
   ctx.font = '48px sans-serif';
   ctx.strokeText(message, 30,70,994);
@@ -76,10 +78,10 @@ const drawRectangle = function() {
         alert("Your x-coordinate must be between 1 and 1024.");
       } else if (y > 512 || x < 1) {
         alert("Your y-coordinate must be between 1 and 512.");
-      } else if (Number.isNaN(width) || Number.isNaN(height) || Number.isNaN(x) || Number.isNaN(y)) {
+      } else if (isNaN(width) || isNaN(height) || isNaN(x) || isNaN(y)) {
         alert("One of your values is not a number.");
       }
-    } while (width > 1024 || width < 1 || height > 512 || height < 1 || x > 1024 || x < 1 || y > 512 || y < 1);
+    } while (width > 1024 || width < 1 || height > 512 || height < 1 || x > 1024 || x < 1 || y > 512 || y < 1 || isNaN(width) || isNaN(height) || isNaN(x) || isNaN(y));
     if (width != null || height != null || x != null || y != null) {
     ctx.rect(x, y, width, height);
     ctx.stroke();
@@ -91,56 +93,26 @@ const drawRectangle = function() {
  */
 
 const drawColoredRectangle = function() {
-  var finalColor;
-  var color;
   var canvas = document.getElementById("student-canvas-3");
   var ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   do {
-    finalColor = "";
-    color = String(prompt("Color: "));
-    color = color.toLowerCase();
-    finalColor = color;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    var color = (prompt("Color: "));
     if (color == null) {
       break;
     }
-    switch(finalColor) {
-    case "blue":
-      finalColor = "blue"
-      break;
-    case "black":
-      finalColor = "black"
-      break;
-    case "green":
-      finalColor = "green"
-      break;
-    case "orange":
-      finalColor = "orange"
-      break;
-    case "purple":
-      finalColor = "purple"
-      break;
-    case "red":
-      finalColor = "red"
-      break;
-    case "yellow":
-      finalColor = "yellow"
-      break;
-    default:
-      alert(color + " is not a supported color.")
-      color = "white";
-      finalColor = "white";
-      break;
+    color = String(color);
+    var formatted = color.toLowerCase();
+    if (formatted != "blue" && formatted != "black" && formatted != "green" && formatted != "orange" && formatted != "purple" && formatted != "red" && formatted != "yellow") {
+      alert (color + " is not a supported color.");
+    }
+  } while (formatted != "blue" && formatted != "black" && formatted != "green" && formatted != "orange" && formatted != "purple" && formatted != "red" && formatted != "yellow");
+
+  if (color != null) {
+    ctx.fillStyle = formatted;
+    ctx.fillRect(10, 10, 100, 50);
   }
-} while (finalColor == "white");
-
-if (finalColor != "white" || color != null) {
-
-ctx.fillStyle = finalColor;
-ctx.fillRect(10, 10, 100, 50);
-}
 };
 
 /*
@@ -164,7 +136,7 @@ const drawTriangle = function() {
      if (side1 == null || side2 == null || side3 == null ||side1 == 0 || side2 == 0 || side3 == 0) {
        break;
      }
-    if (Number.isNaN(side1) || Number.isNaN(side2) || Number.isNaN(side3)) {
+    if (isNaN(side1) || isNaN(side2) || isNaN(side3)) {
       alert("One of your sides is not a number.");
     } else if (side1 > 1024 || side2 > 1024 || side3 > 1024) {
       alert("Your triangle won't fit on the canvas.");
@@ -197,7 +169,7 @@ const drawTriangle = function() {
     if ((newSide1 * newSide1) + (newSide2 * newSide2) !== (newSide3 * newSide3)) {
       alert("That's not a valid right triangle.");
     }
-  } while ((newSide1 * newSide1) + (newSide2 * newSide2) !== (newSide3 * newSide3) || Number.isNaN(side1) || Number.isNaN(side2) || Number.isNaN(side3) || side1 > 1024 || side2 > 1024 || side3 > 1024 );
+  } while ((newSide1 * newSide1) + (newSide2 * newSide2) !== (newSide3 * newSide3) || isNaN(side1) || isNaN(side2) || isNaN(side3) || side1 > 1024 || side2 > 1024 || side3 > 1024 );
 
   var height = newSide1;
   var base = newSide2;
@@ -243,18 +215,18 @@ const drawFace = function() {
     }
   } while(radius < 32 || radius > 256 || isNaN(radius));
 
-  if (radius != null && radius > 32 && radius < 256) {
+  if (radius != null && radius >= 32 && radius <= 256) {
 
     ctx.beginPath();
     ctx.arc(512, 256, radius, 0, 2 * Math.PI)
     ctx.stroke();
     ctx.closePath();
     ctx.beginPath();
-    ctx.arc(512 + 0.4 * radius, 256 + 0.4 * radius, radius * 0.15, 0, 2 * Math.PI)
+    ctx.arc(512 + 0.4 * radius, 256 - 0.4 * radius, radius * 0.15, 0, 2 * Math.PI)
     ctx.stroke();
     ctx.closePath();
     ctx.beginPath();
-    ctx.arc(512 - 0.4 * radius, 256 + 0.4 * radius, radius * 0.15, 0, 2 * Math.PI)
+    ctx.arc(512 - 0.4 * radius, 256 - 0.4 * radius, radius * 0.15, 0, 2 * Math.PI)
     ctx.stroke();
     ctx.closePath();
     ctx.beginPath();
@@ -271,10 +243,10 @@ const drawFace = function() {
  */
 
 const drawPyramid = function() {
-  var distance = Number(distance);
-  var height = Number(height);
-  var row;
-  var column;
+  var distance = 0;
+  var height = 0;
+  var row = 0;
+  var column = 0;
   var counter = 5;
   var canvas = document.getElementById("student-canvas-6");
   var ctx = canvas.getContext('2d');
@@ -287,13 +259,16 @@ const drawPyramid = function() {
       alert("Your block size must be at least one.");
     } else if (side > canvas.height || side > canvas.width) {
       alert("Your pyramid won't fit on the canvas.");
-    } else if (Number.isNaN(side)) {
+    } else if (isNaN(side)) {
       alert("Your block size is not a number.");
     }
-  } while (side < 1 || side > canvas.height || side > canvas.width || Number.isNaN(side));
-  for (i =5; i > 0; i--) {
+  } while (side < 1 || side > canvas.height || side > canvas.width || isNaN(side));
+
+  for (i = 5; i > 0; i--) {
+    counter = i;
+    while (counter >= 1) {
     ctx.beginPath();
-    ctx.rect(10 + distance, (502 - side) - height, Number(side), Number(side));
+    ctx.rect(10 + Number(distance), (502 - side) - Number(height), Number(side), Number(side));
     ctx.stroke();
     ctx.closePath();
     distance = Number(distance) + Number(side);
@@ -302,5 +277,6 @@ const drawPyramid = function() {
   row++;
   distance =  row * (1/2 * side);
   column ++;
-  jeogjt = column + side;
+  height = column * side;
+}
 };
