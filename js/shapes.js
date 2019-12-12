@@ -208,7 +208,7 @@ const drawFace = function() {
       alert("Your smiley face won't fit on the canvas.");
     }
     if (isNaN(radius)) {
-      alert("Your radius is not a number");
+      alert("Your radius is not a number.");
     }
     if (radius == null) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
