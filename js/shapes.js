@@ -87,7 +87,7 @@ const drawRectangle = function() {
       // ctx.clearRect(0, 0, canvas.width, canvas.height);
     } while (width > 1024 || width < 1 || height > 512 || height < 1 || x > 1024 || x < 1 || y > 512 || y < 1 || isNaN(width) || isNaN(height) || isNaN(x) || isNaN(y));
 
-  if (width != null || height != null || x != null || y != null || width < 1024 || width > 1 || height < 512 || height > 1 || x < 1024 || x > 1 || y <512 || y > 1) {
+  if (width != null || height != null || x != null || y != null || width < 1024 || width > 1 || height < 512 || height > 1 || x < 1024 || x > 1 || y < 512 || y > 1) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     ctx.strokeRect(x, y, width, height);
